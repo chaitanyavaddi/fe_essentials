@@ -1,0 +1,86 @@
+- Django is an high-level python framework that enables rapid development of secure and maintainable websites
+- Django follows MVT - Model View Template
+- Django has builtin features
+  - Authentication
+  - Database Management (Django ORM)
+  - Admin Interface
+  - Security features
+
+  Step 1: Create a virtual env
+    python -m venv venv
+    venv\Scripts\activate #windows
+    source venv/bin/activate #mac/linux
+
+  Step 2: Install Django
+    pip install django
+
+  Step 3: Application Requirements
+  - HMS - Hospital Management System
+  - Appointments, users, bills
+  
+  Step 4: Create Django Project
+    django-admin startproject medhahms .
+    python3 manage.py runserver
+
+  Note: Have your Sqlite3 extension installed in vscode
+  so that you can see the db tables in vscode directly
+
+  Step 5: Make django migrations
+    python3 manage.py migrate
+
+  After this you'll see db tables created for default apps
+
+  Step 6: Understand Django Project
+    - settings.py
+    -- Register apps
+    -- Database
+    -- Middleware
+    -- Security
+
+  Step 6: Create & Register App - patients
+  python3 manage.py startapp patients
+  Register app inside project's settings.py
+
+  Step 6.1 Create Model
+  from django.db import models
+
+  # Create your models here.
+  class Patient(models.Model):
+      name = models.CharField(max_length=200)
+      phone = models.CharField(max_length=15)
+      email = models.EmailField()
+
+  Step 6.2 - Apply migrations
+    python3 manage.py makemigrations
+    python3 manage.py migrate
+
+  step 6.3 - Admin setup for patient
+    inside patients/admin.py
+
+    from django.contrib import admin
+    from .models import Patient
+    
+    # Register your models here.
+    admin.site.register(Patient)
+
+  step 6.4 create admin superuser
+    python3 manage.py createsuperuser
+    #fill username, password, email
+
+  step 6.5 start server and goto /admin & login
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+    
+    
