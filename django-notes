@@ -69,8 +69,49 @@
 
   step 6.5 start server and goto /admin & login
 
+  step 6.6 create patient_list inside views.py
+  from django.shortcuts import render
+  from .models import Patient
 
+  def patient_list(request):
+      patients = Patient.objects.all()
+      return render(request, 'templates/list.html',  {'patients': patients})
 
+  We dont have any html yet, so create templates folder inside patients
+  and lets have lits.html 
+
+  step 6.7 Configure app level URLS
+  Two levels of urls - project level and app level
+  create urls.py inside patients
+  from django.urls import path
+  from .views import patient_list
+  
+  urlpatterns = [
+      path('', patient_list)
+  ]
+
+   step 6.8 Configure project level urls
+   inside medhahms/urls.py
+    from django.contrib import admin
+    from django.urls import path, include
+    
+    urlpatterns = [
+        path("admin/", admin.site.urls),
+        path('patients/', include('patients.urls'))
+    ]
+
+   step 6.9 - Render templates inside list.html using templating language
+   inside patients/templates/list.html
+   <h1> Patients </h1>
+    
+    {% for p in patients %}
+     <p> {{ p.id }} - {{ p.name }} - {{ p.phone }}</p>
+    {% endfor %}
+
+   step 7: Goto http://127.0.0.1:8000/patients/
+   You should see list of patients
+  
+ 
 
 
 
