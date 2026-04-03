@@ -108,10 +108,70 @@
      <p> {{ p.id }} - {{ p.name }} - {{ p.phone }}</p>
     {% endfor %}
 
-   step 7: Goto http://127.0.0.1:8000/patients/
+   step 6.10 : Goto http://127.0.0.1:8000/patients/
    You should see list of patients
-  
+
+  step 7: Implement marketing pages
+
+  refer marketing folder
+
+
+  step 8: Create users app to handle signup and login
+
+  python3 manage.py startapp users
+
+  In views.py
+  from django.shortcuts import render, redirect
+  from django.contrib.auth.models import User
+  from django.contrib.auth import login
+
+  step 8.1: Create a signup view
+  # Create your views here.
+  def signup(request):
+      if request.method == 'POST':
+          username = request.POST['username']
+          password = request.POST['password']
+          user = User.objects.create_user(
+              username=username,
+              password=password
+          )
+          login(request, user)
+          return redirect('/dashboard')
+      else:
+          return render(request, 'user_signup.html')
  
+  step 8.2 : create html file inside users/templates
+  
+  <h1>Create New Account</h1>
+  <form method="POST">
+      {% csrf_token %}
+      <input type="text" placeholder="Username" name="username"><br><br>
+      <input type="password" placeholder="Password" name="password"><br><br>
+      <button type="submit">Signup</button>
+  </form>
+
+ step 8.3: Update urls config
+ users/urls.py
+
+  from django.urls import path
+  from .views import signup
+  
+  urlpatterns = [
+      path('signup/', signup)
+  ]
+
+ at project level inside urls.py
+
+  from django.contrib import admin
+  from django.urls import path, include
+  
+  urlpatterns = [
+      path("admin/", admin.site.urls),
+      path('patients/', include('patients.urls')),
+      path('doctors/', include('doctors.urls')),
+      path('', include('marketing.urls')),
+      path('', include('users.urls')),
+  ]
 
 
 
