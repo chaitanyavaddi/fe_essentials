@@ -173,8 +173,54 @@
       path('', include('users.urls')),
   ]
 
+ Step 9: Dashboard APP & View protection
+  We will create a dashboard app that unifies app functionalities. 
+  It will be a central screen that let's us open any module or view we want
+
+ python manage.py startapp dashboard
+
+ dashboard/views.py
+  from django.shortcuts import render
+  from django.contrib.auth.decorators import login_required
+  
+  # Create your views here.
+  @login_required
+  def dashboard_home(request):
+      return render(request, "dashboard_home.html")
 
 
+  dashboard/urls.py
+    from django.urls import path
+    from .views import dashboard_home
+    
+    urlpatterns = [
+        path('', dashboard_home)
+    ]
+
+  medhahms/urls.py
+    from django.contrib import admin
+    from django.urls import path, include
+    
+    
+    urlpatterns = [
+        path("admin/", admin.site.urls),
+        path('patients/', include('patients.urls')),
+        path('doctors/', include('doctors.urls')),
+        path('dashboard/', include('dashboard.urls')),
+        path('', include('marketing.urls')),
+        path('', include('users.urls')),
+    ]
+
+   Please note that we have protected dashboard_home view route by 
+   adding @login_required decorator imported django.contrib.auth.decorators
+
+   Likewise we have added to doctors, patients views as well. 
+
+  Now, lets develop html inside dashboard_home.html
+
+   using AI  we created better styles for patients/templates and doctors/templates
+   Inside /dashboard we have links to /patients and /doctors
+   Inside /patients and /doctors we have links to back to dashboard
 
 
 
