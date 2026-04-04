@@ -222,6 +222,52 @@
    Inside /dashboard we have links to /patients and /doctors
    Inside /patients and /doctors we have links to back to dashboard
 
+   Note: When user was not loggedin, django sends him to /accounts/login
+   When he tried to access any protected route. 
+   We can change this in settings.py
+   Just add below line:
+   LOGIN_URL = '/login/'
+
+  Step 10: Create Appointments App
+  python manage.py startapp appointments
+
+  appointments/models.py
+  from django.db import models
+
+  # Create your models here.
+  class Appointment(models.Model):
+      patient = models.ForeignKey('patients.Patient')
+      doctor = models.ForeignKey('doctors.Doctor')
+      appointment_time = models.DateTimeField()
+      appointment_status = models.CharField(max_length=100)
+      
+  Please note that we have foreign key relations 
+  mapped to Appointment. 
+
+   python3 manage.py makemigrations 
+  python3 manage.py migrate
+
+  Now, register model in admin.py
+
+  from django.contrib import admin
+  from .models import Appointment
+  
+  # Register your models here.
+  admin.site.register(Appointment)
+
+  Note: To support clean representation in django admin for objects
+  Add below to patients/models.py and doctors/models.py classes.
+  
+   def __str__(self):
+        return self.name
+  
+  And below to appointments/models.py class.
+  def __str__(self):
+        return f"{self.patient} - {self.doctor}"
+
+  Login with your superadmin account and you should be able to
+  create, read, update, delete appointments. 
+
 
 
 
