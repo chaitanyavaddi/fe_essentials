@@ -266,8 +266,64 @@
         return f"{self.patient} - {self.doctor}"
 
   Login with your superadmin account and you should be able to
-  create, read, update, delete appointments. 
+  create, read, update, delete appointments.
 
+
+  Step 11: Update & Delete Functioanlitiy for Patient
+
+   We rea already rendering dynamic urls inside patients/list.html
+   Eg. /patients/1/edit will be rednered using below code
+   <td>
+        <a href="/patients/{{ p.id }}/edit" class="btn btn-sm btn-primary">Edit</a>
+         <a href="/patients/{{ p.id }}/delete" class="btn btn-sm btn-danger ms-2">Delete</a>
+    </td>
+
+    Now, when someone clicks on Edit button the GET request is sent to 
+    Eg. /patient/1/edit
+
+    Now, we have to receive id from url in backend
+    and show patient edit form with his details prefilled
+
+    To acheive that,
+     Step 11.1 
+      inside patients/urls.py
+      urlpatterns = [
+          path('', patient_list),
+          path('<int:pk>/edit', patient_edit)
+      ]
+
+      Here our id from the url which is 1 will be received into variable called 'pk'
+     As you can see, the route is mapped to pateint_edit view
+
+      Step 11.2 Update patients/views.py as below
+      from django.shortcuts import get_object_or_404
+      @login_required
+      def patient_edit(request, pk):
+          patient = get_object_or_404(Patient, pk=pk)
+          return render(request, 'patient_edit.html', {'patient': patient})
+
+      here inside ok paramater we will receive 1 as integer
+      Then we are quering database using get_object_or_404
+      if pateitn is retreived we are sending to  patient_edit.html
+
+      Step 11.3 Update patient_edit.html to show patient details prefilled
+      
+      <form method="POST">
+          <input type="text" name="name" value="{{ patient.name }}">
+          <input type="text" name="phone" value="{{ patient.phone }}">
+          <button type="submit">Save</button>
+      </form>
+
+      Value attributes are rendered with actual data from patient
+
+      
+
+   
+
+
+
+
+  
 
 
 
