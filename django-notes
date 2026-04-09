@@ -78,7 +78,7 @@
       return render(request, 'templates/list.html',  {'patients': patients})
 
   We dont have any html yet, so create templates folder inside patients
-  and lets have lits.html 
+  and lets have list.html 
 
   step 6.7 Configure app level URLS
   Two levels of urls - project level and app level
@@ -315,12 +315,54 @@
       </form>
 
       Value attributes are rendered with actual data from patient
-
       
 
-   
+      Step 12: Integrating external services
+      Resend 
+            pip install resend
+            in settings.py
+             RESEND_API_KEY = "create_from_your_dashboard"
+        usage:
+        import resend
+        resend.api_key = settings.RESEND_API_KEY  #resend.com
+        resend.Emails.send(
+                    {
+                        'from': 'onboarding@resend.dev',
+                        'to': ['hellochaitanyavaddi@gmail.com'],
+                        "subject": 'Welcome to HMS',
+                        "html": f'<h1>Welcome {user.username}</h1>'
+                    }
+                )
+      Google GenAI:
+      pip install google
+      GEMINI_API_KEY = "get_from_dashboard" #aistudio.google.com
+      see dashboard_hms_ai function isnide dashboard/views for implementation
+      
 
+      Step 13: CBV - Class Based Views
 
+      Eg:
+      
+      class AppointmentListView(views.View):
+      
+          def get(self, request):
+              appoinments = Appointment.objects.all()
+              return render(request, 'app_list.html', {'appointments': appoinments})
+      
+          def post(self, request):
+              pass
+
+      from django.urls import path
+      # from .views import appointment_list
+      from .views import AppointmentListView
+      
+      urlpatterns = [
+          path('', AppointmentListView.as_view()),
+      ]
+
+      Step 14: rest API using DRF - Django rest framework
+      pip install djangorestframework
+      
 
 
   
