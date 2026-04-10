@@ -362,7 +362,58 @@
 
       Step 14: rest API using DRF - Django rest framework
       pip install djangorestframework
-      
+      create serializers.py
+      Map serializer to CBVs for patients, doctors
+      Goto patietns/api - you shall see api version of the same
+
+    Step 15: Deployment
+    supabase.com
+    Create Org, Create project, Create Database
+    Settings --> In the top --> You'll see connect button, click it.
+    Goto ORM Tab, scroll down
+    See DIRECT_URL, extract following and out them inside settings.py 
+    postgresql://username:password@host:port/db_name
+
+   pip install python-decouple
+   move your secrets to .env
+   read them in settings.py as:
+    DATABASES = {
+     'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST'),
+        'PORT': config('DB_PORT', default='5432'),
+        'OPTIONS': {
+            'sslmode': 'require',
+        },
+    }
+  }
+
+   Do migrations
+   python manage.py migrate
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   
