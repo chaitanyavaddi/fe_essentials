@@ -366,17 +366,18 @@
       Map serializer to CBVs for patients, doctors
       Goto patietns/api - you shall see api version of the same
 
-    Step 15: Deployment
-    supabase.com
-    Create Org, Create project, Create Database
-    Settings --> In the top --> You'll see connect button, click it.
-    Goto ORM Tab, scroll down
-    See DIRECT_URL, extract following and out them inside settings.py 
-    postgresql://username:password@host:port/db_name
+    Step 15: Migrate from sqlite3 to Postgres
+    1. Managed Postgres -> supabase.com
+    2. Create Org, Create project, Create Database
+    3. Settings --> In the top --> You'll see connect button, click it.
+    4. Goto ORM Tab, scroll down
+    5. See DIRECT_URL, extract following and out them inside settings.py 
+    6. postgresql://username:password@host:port/db_name
 
+  Step 15.1: Move secrets to .env & Connect Postgres
    pip install python-decouple
    move your secrets to .env
-   read them in settings.py as:
+   read them in settings.py as below (remove our sqlite3 config)
     DATABASES = {
      'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -391,8 +392,13 @@
     }
   }
 
-   Do migrations
+  step 15.2: delete migration files inside every app (don;t delete folder or __init__ files inside them)
    python manage.py migrate
+   python manage.py makemigrations
+   python manage.py migrate
+
+
+  You shall see the db tables created inside table editor in supabase
 
     
 
