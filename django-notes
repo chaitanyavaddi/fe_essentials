@@ -400,7 +400,25 @@
 
   You shall see the db tables created inside table editor in supabase
 
-    
+  step 15.3: Prepare requirements.txt file
+  python -m venv venv
+  venv\Scripts\activate #windows
+  source venv/bin/activate #mac
+  pip install Django psycopg2-binary python-decouple djangorestframework resend google-genai markdown-it-py
+  pip3 freeze > requirements.txt
+
+step 15.4 - Allow all hosts
+in settings.py change as below:
+DEBUG = False
+ALLOWED_HOSTS = ['*']
+
+ Step 15.5 - Deploy
+  - Create account on render.com
+  - In dashboard, choose web service
+  - Select public repository tab and paste your repo link
+  - Build command - pip install -r requirements.txt
+  - Start command - python manage.py runserver 0.0.0.0:8000
+  - The build will start & you can access the app 
 
 
 
