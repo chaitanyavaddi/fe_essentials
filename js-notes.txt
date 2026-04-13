@@ -1,0 +1,98 @@
+Js - Programming language aspect
+Js - DOm manipulation aspect
+
+Data Types:
+var age  = 20;
+var name = "Ashok";
+var is_married = false;
+var names = ["Jane", "Mike", "Roy"]
+var details = {
+    first_name: 'Ashok',
+    last_name: 'Varma',
+    age: 30
+}
+details.first_name = 'Kumar';
+details.age += 1
+console.log(details);
+
+// A constant can't be modified once it is created
+const a = 3;
+a = 5;
+console.log(a);
+
+
+- DOM - Document Object Model
+
+html
+ - body
+ -- div
+  - p Hello world
+   
+var document = {
+    html: {
+        body: {
+            div: {
+                p: 'Hello world'
+            }
+        }
+    }
+}
+
+- Browser converts HTML -> tree of objects
+- You can manipulate the page using javascript
+
+document.html.body.div.p = 'Hello Hyd'
+console.log(document)
+
+
+
+https://testautomationpractice.blogspot.com/
+print 'Automation Testing Practice' using javascript
+
+Section 1: Selecting Elements
+document.getElementById("id")
+document.getElementsByClassName("class")
+document.getElementsByTagName("p")
+
+Solution:
+let headerBlock = document.getElementById("header-inner");
+let title = headerBlock.getElementsByClassName("title");
+console.log(title[0].textContent);
+'Automation Testing Practice'
+
+
+Section 2: Change Styles
+title[0].style.color = "green";
+title[0].style.backgroundColor = "yellow";
+title[0].style.fontSize = "30px";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
