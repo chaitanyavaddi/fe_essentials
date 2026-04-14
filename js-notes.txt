@@ -70,7 +70,60 @@ title[0].style.fontSize = "30px";
 
 
 
+1. React 
+- It is a front end JS library, not a framework
+- Developed by Facebook, also known as React.js or ReactJS
+- Think in React - Breakdown Ui into small hirierchial components
 
+2. Setup:
+-- 2.1 Install Node
+- Node.js to be installed (js runtime)
+- https://nodejs.org/en/download/
+- Download an install package / exe
+
+-- 2.2 Create vscode project
+- Create vscode new project
+- node -v in terminal
+
+-- 2.3 Add a build tool
+- Install a build tool - Vite
+- npm install -g create-vite
+
+-- 2.4 Create a React Application
+npm create vite@latest . -- --template react
+App will start at: http://localhost:5173/
+
+3. Structure of App
+-- node_modules - equavalent to venv in python projects
+-- public - anything app exposes to outside world shd be here
+-- vite.config.js -- build tool config
+-- readme.md - documentation markdown file
+-- package.json - equavalent to requirements.tst in  python projects
+-- index.html - base html with div with id as root
+-- .gitignore - to avoid pushing unnecessary files
+-- eslint.config.ts - this is a for clean dev, rules on code practices
+-- src/App.jsx 
+Below is a component returning some html
+    function App() {
+      return (
+        <div className="App">
+          <h1>Hello Hyderabad!</h1>
+        </div>
+      );
+    }
+    
+    export default App;
+-- src/main.jsx
+    import { StrictMode } from 'react'
+    import { createRoot } from 'react-dom/client'
+    import './index.css'
+    import App from './App.jsx'
+    
+    createRoot(document.getElementById('root')).render(
+      <StrictMode>
+        <App />
+      </StrictMode>,
+    )
 
 
 
