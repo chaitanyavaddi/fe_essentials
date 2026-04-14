@@ -126,11 +126,91 @@ Below is a component returning some html
     )
 
 
+4. What is JSX?
+- JSX - Javascript + XML
+- This allows us to write HTML in react
+- You can use bwlo syntax to write jsx expressions inside components
+
+    function App() {
+      var hyd_pop = 500
+      return (
+        <div className="App">
+          <h1>Hello Hyderabad!</h1>
+          <p>The population is {hyd_pop * 100}</p>
+        </div>
+      );
+    }
+    
+    export default App;
+
+ - A jsx component can return only one html element
+ - If you want it to return multiple elements, you fragment as below
+ 
+    function App() {
+      var hyd_pop = 500
+      return (
+        <>
+          <div className="App">
+            <h1>Hello Hyderabad!</h1>
+            <p>The population is {hyd_pop * 100}</p>
+          </div>
+          <div>
+            <p>This is a new paragraph</p>
+          </div>
+        </>
+      );
+    }
+    
+    export default App;
+
+ -- You can repeat compoentns as many times as you want, they are independent
+ -- You can compose components to define UI
+
+  src/Greeting.jsx
+      
+    function Greeting() {
+      return (
+            <p>Hi, How are you?</p>
+      );
+    }
+    
+    export default Greeting;
+
+  src/App.jsx
+  
+    import Greeting from './Greeting.jsx'
+    
+    function App() {
+      var hyd_pop = 500
+      return (
+        <>
+          <div className="App">
+            <h1>Hello Hyderabad!</h1>
+            <p>The population is {hyd_pop * 100}</p>
+          </div>
+          <div>
+            <p>This is a new paragraph</p>
+          </div>
+          <Greeting/>
+        </>
+      );
+    }
+    
+    export default App;
 
 
-
-
-
+    src/main.jsx
+    import { StrictMode } from 'react'
+    import { createRoot } from 'react-dom/client'
+    import './index.css'
+    import App from './App.jsx'
+    
+    
+    createRoot(document.getElementById('root')).render(
+      <StrictMode>
+        <App />
+      </StrictMode>,
+    )
 
 
 
