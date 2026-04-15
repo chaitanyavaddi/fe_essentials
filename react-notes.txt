@@ -212,11 +212,97 @@ Below is a component returning some html
       </StrictMode>,
     )
 
+  Step 5; React Components
+  - Components are small chunks of code wrapped as a class or a function
+  - In modern react, function based components took lead
+
+ -- 5.1 Compose components for TodoAPP
+    In the App.jsx
+
+        function TodoInput() {
+          return (
+            <div>
+              <input type="text" placeholder="Enter task"/>
+              <button>Add</button>
+            </div>
+          )
+        }
+        
+        function TodoItem() {
+          return (
+            <li>
+              <span>Sample task</span>
+              <button>Delete</button>
+            </li>
+          )
+        }
+        
+        function TodoList() {
+          return (
+            <ul>
+              <TodoItem />
+              <TodoItem />
+              <TodoItem />
+            </ul>
+          )
+        }
+        
+        function App() {
+          return (
+            <>
+              <h1>Todo App</h1>
+              <TodoInput />
+              <TodoList />
+            </>
+          );
+        }
+        
+        export default App;
 
 
+   6. React Props
+-- These are like function arguments in Javascript and attributes in HTML
 
-
-
+    
+    function TodoInput() {
+      return (
+        <div>
+          <input type="text" placeholder="Enter task"/>
+          <button>Add</button>
+        </div>
+      )
+    }
+    
+    function TodoItem({ title }) {
+      return (
+        <li>
+          <span>{title}</span>
+          <button>Delete</button>
+        </li>
+      )
+    }
+    
+    function TodoList() {
+      return (
+        <ul>
+          <TodoItem title='Learn python'/>
+          <TodoItem title='Do Chores'/>
+          <TodoItem title='Learn guitar'/>
+        </ul>
+      )
+    }
+    
+    function App() {
+      return (
+        <>
+          <h1>Todo App</h1>
+          <TodoInput />
+          <TodoList />
+        </>
+      );
+    }
+    
+    export default App;
 
 
 
