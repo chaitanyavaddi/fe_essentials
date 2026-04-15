@@ -305,6 +305,50 @@ Below is a component returning some html
     export default App;
 
 
+    Now, lets pass todos from app APp 
+
+    function TodoInput() {
+      return (
+        <div>
+          <input type="text" placeholder="Enter task"/>
+          <button>Add</button>
+        </div>
+      )
+    }
+    
+    function TodoItem({ text }) {
+      return (
+        <li>
+          <span>{text}</span>
+          <button>Delete</button>
+        </li>
+      )
+    }
+    
+    function TodoList({ items }) {
+      return (
+        <ul>{
+         items.map((item, index) => (
+          <TodoItem key={index} text={item} />
+         ))
+        }
+        </ul>
+      )
+    }
+    
+    function App() {
+      const todos = ['Learn Python', "build App", "Do Chores"]
+      return (
+        <>
+          <h1>Todo App</h1>
+          <TodoInput />
+          <TodoList items={todos}/>
+        </>
+      );
+    }
+    
+    export default App;
+
 
 
 
