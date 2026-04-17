@@ -349,6 +349,66 @@ Below is a component returning some html
     
     export default App;
 
+  - React State
+- LifeCycle
+- 1. Event is triggered (Click, hold, drag, drop, scroll, right click etc..)
+- 2. Function to react for the event; eg. alter the state of a variable
+- 3. State will be modified
+- 4. Component will be re-rendered
+
+
+    import { useState } from "react";
+    
+    
+    function TodoItem({ text }) {
+      return (
+        <div>
+          <span>{text}</span>
+          <button>Delete</button>
+        </div>
+      )
+    }
+    
+    function TodoList({ items }) {
+      return (
+        <ul>{
+         items.map((item, index) => (
+          <TodoItem key={index} text={item} />
+         ))
+        }
+        </ul>
+      )
+    }
+    
+    function App() {
+      const [todos, setTodos] = useState(['Learn Python', "build App", "Do Chores"])
+      const [title, setTitle] = useState(""); //fix bike
+    
+      const handleAdd = () => {
+        setTodos([...todos, title]);
+        setTitle("");
+      }
+    
+      return (
+        <>
+          <h1>Todo App</h1>
+           <div>
+            <input 
+              type="text" 
+              placeholder="Enter task" 
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            <button onClick={handleAdd}>Add</button>
+          </div>
+          <TodoList items={todos}/>
+        </>
+      );
+    }
+    
+    export default App;
+    
+    
 
 
 
