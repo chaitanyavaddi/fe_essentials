@@ -410,6 +410,64 @@ Below is a component returning some html
     
     
 
+  Implement delete functionality:
+
+      import { useState } from "react";
+    
+    
+    function TodoItem({ text, onDelete }) {
+      return (
+        <div>
+          <span>{text}</span>
+          <button onClick={onDelete}>Delete</button>
+        </div>
+      )
+    }
+    
+    function TodoList({ items, onDelete }) {
+      return (
+        <ul>{
+         items.map((item, index) => (
+          <TodoItem key={index} text={item} onDelete={() => onDelete(index)}/>
+         ))
+        }
+        </ul>
+      )
+    }
+    
+    function App() {
+      const [todos, setTodos] = useState(['Learn Python', "build App", "Do Chores"])
+      const [title, setTitle] = useState(""); //fix bike
+    
+      const handleAdd = () => {
+        setTodos([...todos, title]);
+        setTitle("");
+      }
+    
+      const handleDelete = (index) => {
+        setTodos(todos.filter((_, i) => i != index));
+      }
+    
+      return (
+        <>
+          <h1>Todo App</h1>
+           <div>
+            <input 
+              type="text" 
+              placeholder="Enter task" 
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            <button onClick={handleAdd}>Add</button>
+          </div>
+          <TodoList items={todos} onDelete={handleDelete}/>
+        </>
+      );
+    }
+    
+    export default App;
+    
+    
 
 
 
