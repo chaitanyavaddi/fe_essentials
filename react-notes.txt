@@ -468,7 +468,7 @@ Below is a component returning some html
     export default App;
     
     
-
+    Just like above, try to implement edit functioality
 
 
 
